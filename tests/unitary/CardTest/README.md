@@ -1,5 +1,6 @@
-Testes da Classe ClientControllerCardTest
-Este README descreve os testes da classe ClientControllerCardTest, que verifica o funcionamento do controlador de clientes no gerenciamento de cartões de crédito em um sistema de gerenciamento de usuários. Os testes são realizados na classe ClientController, que gerencia operações como adição, remoção e desativação de cartões de crédito de usuários.
+Testes da Classe CardTest
+
+Este README descreve os testes da classe CardTest, que verifica o funcionamento do controlador de clientes no gerenciamento de cartões de crédito em um sistema de gerenciamento de usuários. Os testes são realizados na classe ClientController, que gerencia operações como adição, remoção e desativação de cartões de crédito de usuários.
 
 Estrutura dos Testes
 Os testes são organizados da seguinte forma:
