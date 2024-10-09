@@ -1,5 +1,6 @@
 package test;
 
+import Stores.EventStore;
 import controller.AdminController;
 import models.Evento;
 import models.Review;
@@ -12,6 +13,7 @@ import org.junit.Test;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -19,13 +21,15 @@ public class EventTest {
 
     private AdminController adminController;
     private EventService eventService;
+    private EventStore eventStore;
     private ReviewService reviewService;
     private Usuario admin;
     private Evento evento;
 
     @Before
     public void setUp() {
-        eventService = new EventService(new Stores.EventStore(), new Stores.ReviewStore());
+        eventStore = new EventStore();
+        eventService = new EventService(eventStore, new Stores.ReviewStore());
         reviewService = new ReviewService(new Stores.ReviewStore());
         adminController = new AdminController(eventService, reviewService);
         admin = new Usuario("Admin", "admin@example.com", "password", "123456789", "g@gmail.com", true);
@@ -65,6 +69,8 @@ public class EventTest {
         adminController.listEvents();
 
         Evento retrievedEvent = eventService.getEvent(evento.getName());
+        List<Evento> events = eventStore.get();
+        assertEquals(1, events.size());
         assertNotNull(retrievedEvent);
     }
 
