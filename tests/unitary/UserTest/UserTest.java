@@ -1,19 +1,13 @@
 public class UserTest {
-    private EventController eventController;
-    private TicketController ticketController;
     private UserController userController;
 
     @Before
     public void setUp() {
-        eventController = new EventController();
-        ticketController = new TicketController();
         userController =  new UserController();
     }
 
     @After
     public void tearDown() {
-        eventController.deleteAll();
-        ticketController.deleteAll();
         userController.deleteAll();
     }
 
