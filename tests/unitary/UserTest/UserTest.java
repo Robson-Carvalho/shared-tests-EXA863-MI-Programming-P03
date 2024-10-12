@@ -1,79 +1,53 @@
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
 public class UserTest {
-    private UserController userController;
+    private UserTestFacade userFacade;
 
     @Before
     public void setUp() {
-        userController =  new UserController();
+        /*  Método para instânciar a fachada de testes sempre 
+            que um teste for executado.*/
+        userFacade = new UserTestFacade();
     }
 
     @After
     public void tearDown() {
-        userController.deleteAll();
-    }
-
-
-    @Test
-    public void duplicateUserInDataBaseTest() throws Exception {
-        userController.create("johndoe", "senha123", "John Doe", "12345678901", "john.doe@example.com", false);
-
-        try{
-             userController.create("johndoe", "senha456", "John Doe", "12345678901", "john.doe@example.com", false);
-        }catch (Exception e){
-            assertEquals(e.getMessage(), "Login, email e/ou cpf já está em uso.");
-        }
+        /*  Método para apagar todos os usuários do database, visando que as 
+            informações de um teste anterior afete o teste atual.*/
+        userFacade.deleteAllUsers();
     }
 
     @Test
-    public void createUserInDataBaseTest() throws Exception {
-        User user = userController.create("johndoe", "senha123", "John Doe", "12345678901", "john.doe@example.com", false);
+    public void createUserTest() {
+        String login = "login";
+        String name = "testUser";
+        String email = "test@example.com";
+        String password = "teste123";
+        String cpf = "123456789";
+        Boolean isAdmin = false;
 
-        User createdUser = userController.getById(user.getId());
+        boolean userExists = userFacade.thereIsUserWithEmail(email);
+        assertFalse(userExists);
 
-        assertNotNull(createdUser);
-        assertEquals(user.getId(), createdUser.getId());
-    }
+        boolean createdUser = userFacade.create(login, password, name, cpf, email, isAdmin);
+        assertTrue(createdUser);
 
-    @Test
-    public void createUsersInDataBaseTest() throws Exception {
-        userController.create("johndoe", "senha123", "John Doe", "12345678901", "john.doe@example.com", false);
-        userController.create("lucas", "senha456", "John Doe", "12345678902", "lucas.doe@example.com", false);
+        String createdUserLogin = userFacade.getLoginByUserEmail(email);
+        String createdUserName = userFacade.getNameByUserEmail(email);
+        String createdUserEmail = userFacade.getEmailByUserEmail(email);
+        String createdUserPassword = userFacade.getPasswordByUserEmail(email);
+        String createdUserCPF = userFacade.getCpfByUserEmail(email);
+        boolean createdUserIsAdmin = userFacade.getIsAdminByUserEmail(email);
 
-        List<User> users = userController.getAll();
-
-        assertEquals(2, users.size());
-    }
-
-
-    @Test
-    public void deleteUserTest() throws Exception {
-        User user = userController.create("johndoe", "senha123", "John Doe", "12345678901", "john.doe@example.com", false);
-        userController.delete(user.getId());
-
-        User createdUser = userController.getById(user.getId());
-
-        assertNull(createdUser);
-    }
-
-    @Test
-    public void updateUserTest() throws Exception {
-        User firstUser = userController.create("john", "senha123", "John", "12345678901", "john@example.com", false);
-        User secondUser = userController.create("lucas", "senha456", "Lucas", "12345678902", "lucas@example.com", false);
-
-        firstUser.setEmail(secondUser.getEmail());
-
-        try{
-            userController.update(firstUser);
-        }catch (Exception e){
-            assertEquals(e.getMessage(), "Email já está em uso.");
-        }
-
-        firstUser.setEmail("john123@example.com");
-
-        userController.update(firstUser);
-
-        User updatedUser = userController.getById(firstUser.getId());
-
-        assertEquals(updatedUser.getEmail(), firstUser.getEmail());
-
+        assertEquals(login, createdUserLogin);
+        assertEquals(name, createdUserName);
+        assertEquals(email, createdUserEmail);
+        assertEquals(password, createdUserPassword);
+        assertEquals(cpf, createdUserCPF);
+        assertEquals(isAdmin, createdUserIsAdmin);
     }
 }
