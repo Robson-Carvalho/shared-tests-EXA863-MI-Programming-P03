@@ -1,9 +1,7 @@
 public class UserTestFacade {
-    private final UserController userController;
+    // Classes para trabalhar com os testes
 
-    public UserTestFacade() {
-        this.userController = new UserController();
-    }
+    public UserTestFacade() {}
 
     public boolean create(String login, String password, String name, String cpf, String email, Boolean isAdmin) {
         
