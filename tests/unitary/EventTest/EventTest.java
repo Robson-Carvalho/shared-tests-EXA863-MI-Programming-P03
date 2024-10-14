@@ -1,3 +1,7 @@
+package Tests;
+
+import Facade.EventTestFacade;
+import Facade.UserTestFacade;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -124,7 +128,7 @@ public class EventTest {
         assertTrue(eventFacade.getIsActiveByEventId(id));
     }
 
-    @Test
+    @Test(expected = SecurityException.class)
     public void inactiveEventTest() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2023, Calendar.SEPTEMBER, 10);
@@ -144,6 +148,5 @@ public class EventTest {
 
         assertFalse(eventFacade.getIsActiveByEventId(id));
     }
-
 }
 
