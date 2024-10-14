@@ -13,6 +13,18 @@ public class UserTestFacade {
         
     }
 
+    public void setNameByUserEmail(String name, String email) {
+    
+    }
+
+    public void setPasswordByUserEmail(String password, String email) {
+       
+    }
+
+    public void setEmailByUserEmail(String newEmail, String email) {
+       
+    }
+
     public String getNameByUserEmail(String email) {
         
     }

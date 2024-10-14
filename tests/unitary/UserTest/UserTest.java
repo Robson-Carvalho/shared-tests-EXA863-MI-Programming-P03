@@ -50,4 +50,24 @@ public class UserTest {
         assertEquals(cpf, createdUserCPF);
         assertEquals(isAdmin, createdUserIsAdmin);
     }
+
+    @Test
+    public void updateUserTest(){
+        String login = "login";
+        String name = "testUser";
+        String email = "test@example.com";
+        String password = "teste123";
+        String cpf = "123456789";
+        Boolean isAdmin = false;
+
+        userFacade.create(login, password, name, cpf, email, isAdmin);
+
+        userFacade.setNameByUserEmail("newName", email);
+        userFacade.setPasswordByUserEmail("teste234", email);
+        userFacade.setEmailByUserEmail("war@example.com", email);
+
+        assertEquals("newName", userFacade.getNameByUserEmail("war@example.com"));
+        assertEquals("teste234", userFacade.getPasswordByUserEmail("war@example.com"));
+        assertEquals("war@example.com", userFacade.getEmailByUserEmail("war@example.com"));
+    }
 }
