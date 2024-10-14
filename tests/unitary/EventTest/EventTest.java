@@ -1,8 +1,3 @@
-package test.java.com.UEFS.system.CommonTests.EventTest;
-
-import main.java.UEFS.system.model.Event;
-import main.java.UEFS.system.testFacade.EventTestFacade.EventTestFacade;
-import main.java.UEFS.system.testFacade.UserTestFacade.UserTestFacade;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
