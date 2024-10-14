@@ -52,6 +52,21 @@ public class UserTest {
     }
 
     @Test
+    public void createAdminUserTest() {
+        String login = "login";
+        String name = "testUser";
+        String email = "test@example.com";
+        String password = "teste123";
+        String cpf = "123456789";
+        Boolean isAdmin = true;
+
+        boolean createdUser = userFacade.create(login, password, name, cpf, email, isAdmin);
+        assertTrue(createdUser);
+
+        assertTrue(userFacade.getIsAdminByUserEmail(email));
+    }
+
+    @Test
     public void getUsersTest() {
         assertEquals(0, userFacade.getSizeUsers());
 
