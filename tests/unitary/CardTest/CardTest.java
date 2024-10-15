@@ -97,7 +97,7 @@ public class CardTest {
 
         cardFacade.disable(id);
 
-        assertTrue(cardFacade.getStatusByCardId(id));
+        assertFalse(cardFacade.getStatusByCardId(id));
     }
 
     @Test
