@@ -57,10 +57,8 @@ public class PurchaseTest {
         String cpf1 = "123456009";
         Boolean isAdmin1 = false;
 
-        String cardId = null;
-
-        userFacade.create(login, nameUser, email, password, cpf, isAdmin);
-        userFacade.create(login1, nameUser1, email1, password1, cpf1, isAdmin1);
+        userFacade.create(login, password, nameUser, cpf, email, isAdmin);
+        userFacade.create(login1, password1, nameUser1, cpf1, email1, isAdmin1);
 
         String eventId = eventFacade.create(login, name, description, date);
 
@@ -105,11 +103,11 @@ public class PurchaseTest {
         Date expiryDate = calendar.getTime();
         int cvv = 789;
 
-        String cardId = cardFacade.create(email, cardNumber, expiryDate, cvv);
-        assertNotNull(cardFacade.getById(cardId));
+        userFacade.create(login, password, nameUser, cpf, email, isAdmin);
+        userFacade.create(login1, password1, nameUser1, cpf1, email1, isAdmin1);
 
-        userFacade.create(login, nameUser, email, password, cpf, isAdmin);
-        userFacade.create(login1, nameUser1, email1, password1, cpf1, isAdmin1);
+        String cardId = cardFacade.create(email1, cardNumber, expiryDate, cvv);
+        assertNotNull(cardFacade.getById(cardId));
 
         String eventId = eventFacade.create(login, name, description, date);
 
