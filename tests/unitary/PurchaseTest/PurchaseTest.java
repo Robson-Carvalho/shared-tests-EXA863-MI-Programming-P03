@@ -14,7 +14,7 @@ public class PurchaseTest {
     private UserTestFacade userFacade;
     private TicketTestFacade ticketFacade;
     private EventTestFacade eventFacade;
-    private PurchaseTestFace purchaseFacade;
+    private PurchaseTestFacade purchaseFacade;
     private CardTestFacade cardFacade;
 
     @Before
@@ -22,7 +22,7 @@ public class PurchaseTest {
         cardFacade = new CardTestFacade();
         userFacade = new UserTestFacade();
         eventFacade = new EventTestFacade();
-        purchaseFacade = new PurchaseTestFace();
+        purchaseFacade = new PurchaseTestFacade();
         ticketFacade = new TicketTestFacade();
     }
 
@@ -66,7 +66,9 @@ public class PurchaseTest {
 
         assertNotNull(eventFacade.getById(eventId));
 
-        String purchaseId = purchaseFacade.create(email1, eventId, null);
+        eventFacade.addSeatByEventId("A1", eventId);
+
+        String purchaseId = purchaseFacade.create(email1, eventId, null, "A1");
 
         assertNotNull(purchaseFacade.getById(purchaseId));
         assertEquals(eventId, purchaseFacade.getEventByPurchaseId(purchaseId));
@@ -113,7 +115,9 @@ public class PurchaseTest {
 
         assertNotNull(eventFacade.getById(eventId));
 
-        String purchaseId = purchaseFacade.create(email1, eventId, cardId);
+        eventFacade.addSeatByEventId("A1", eventId);
+
+        String purchaseId = purchaseFacade.create(email1, eventId, cardId, "A1");
 
         assertNotNull(purchaseFacade.getById(purchaseId));
         assertEquals(eventId, purchaseFacade.getEventByPurchaseId(purchaseId));
