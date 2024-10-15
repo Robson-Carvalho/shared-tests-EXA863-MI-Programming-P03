@@ -56,4 +56,86 @@ public class TicketTest {
         assertEquals("A1", ticketFacade.getSeatByTicketId(ticketId));
         assertTrue(ticketFacade.getIsAdminTicketId(ticketId));
     }
+
+    @Test
+    public void ticketCancelTest() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2025, Calendar.SEPTEMBER, 10);
+        String name = "Show de Rock";
+        String description = "Banda XYZ";
+        Date date = calendar.getTime();
+
+        String login = "john";
+        String nameUser = "john souza";
+        String email = "john@example.com";
+        String password = "teste123";
+        String cpf = "123456789";
+        Boolean isAdmin = true;
+
+        userFacade.create(login, password, nameUser, cpf, email, isAdmin);
+
+        String eventId = eventFacade.create(login, name, description, date);
+
+        String ticketId = ticketFacade.create(eventId, 100.0, "A1");
+
+        ticketFacade.cancelByTicketId(ticketId);
+
+        assertFalse(ticketFacade.getIsActive(ticketId));
+    }
+
+
+    @Test
+    public void testReactivateTicket() throws Exception {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2025, Calendar.SEPTEMBER, 10);
+        String name = "Show de Rock";
+        String description = "Banda XYZ";
+        Date date = calendar.getTime();
+
+        String login = "john";
+        String nameUser = "john souza";
+        String email = "john@example.com";
+        String password = "teste123";
+        String cpf = "123456789";
+        Boolean isAdmin = true;
+
+        userFacade.create(login, password, nameUser, cpf, email, isAdmin);
+
+        String eventId = eventFacade.create(login, name, description, date);
+
+        String ticketId = ticketFacade.create(eventId, 100.0, "A1");
+
+        ticketFacade.cancelByTicketId(ticketId);
+        assertFalse(ticketFacade.getIsActive(ticketId));
+
+        ticketFacade.reactiveById(ticketId);
+        assertTrue(ticketFacade.getIsAdminTicketId(ticketId));
+    }
+
+    @Test
+    public void duplicateTicketTest() throws Exception {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2025, Calendar.SEPTEMBER, 10);
+        String name = "Show de Rock";
+        String description = "Banda XYZ";
+        Date date = calendar.getTime();
+
+        String login = "john";
+        String nameUser = "john souza";
+        String email = "john@example.com";
+        String password = "teste123";
+        String cpf = "123456789";
+        Boolean isAdmin = true;
+
+        userFacade.create(login, password, nameUser, cpf, email, isAdmin);
+
+        String eventId = eventFacade.create(login, name, description, date);
+
+        ticketFacade.create(eventId, 100.0, "A1");
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            ticketFacade.create(eventId, 100.0, "A1");
+        });
+
+        assertEquals("Não é possível cadastrar o mesmo assento duas vezes para um único evento.", exception.getMessage());
+    }
 }
