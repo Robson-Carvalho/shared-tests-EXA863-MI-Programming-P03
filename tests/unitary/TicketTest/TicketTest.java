@@ -1,3 +1,6 @@
+import Facade.EventTestFacade;
+import Facade.TicketTestFacade;
+import Facade.UserTestFacade;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +43,7 @@ public class TicketTest {
         String email = "john@example.com";
         String password = "teste123";
         String cpf = "123456789";
-        Boolean isAdmin = true;
+        Boolean isAdmin = false;
 
         userFacade.create(login, password, nameUser, cpf, email, isAdmin);
 
@@ -70,7 +73,7 @@ public class TicketTest {
         String email = "john@example.com";
         String password = "teste123";
         String cpf = "123456789";
-        Boolean isAdmin = true;
+        Boolean isAdmin = false;
 
         userFacade.create(login, password, nameUser, cpf, email, isAdmin);
 
@@ -97,7 +100,7 @@ public class TicketTest {
         String email = "john@example.com";
         String password = "teste123";
         String cpf = "123456789";
-        Boolean isAdmin = true;
+        Boolean isAdmin = false;
 
         userFacade.create(login, password, nameUser, cpf, email, isAdmin);
 
@@ -125,7 +128,7 @@ public class TicketTest {
         String email = "john@example.com";
         String password = "teste123";
         String cpf = "123456789";
-        Boolean isAdmin = true;
+        Boolean isAdmin = false;
 
         userFacade.create(login, password, nameUser, cpf, email, isAdmin);
 
