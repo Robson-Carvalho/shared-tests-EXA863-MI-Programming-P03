@@ -1,6 +1,3 @@
-import Facade.EventTestFacade;
-import Facade.TicketTestFacade;
-import Facade.UserTestFacade;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +40,7 @@ public class TicketTest {
         String email = "john@example.com";
         String password = "teste123";
         String cpf = "123456789";
-        Boolean isAdmin = false;
+        Boolean isAdmin = true;
 
         userFacade.create(login, password, nameUser, cpf, email, isAdmin);
 
@@ -57,7 +54,7 @@ public class TicketTest {
         assertEquals(eventId, ticketFacade.getEventByTicketId(ticketId));
         assertEquals(100.0, ticketFacade.getPriceByTicketId(ticketId), 0.0001);
         assertEquals("A1", ticketFacade.getSeatByTicketId(ticketId));
-        assertTrue(ticketFacade.getIsAdminTicketId(ticketId));
+        assertTrue(ticketFacade.getIsActive(ticketId));
     }
 
     @Test
@@ -73,7 +70,7 @@ public class TicketTest {
         String email = "john@example.com";
         String password = "teste123";
         String cpf = "123456789";
-        Boolean isAdmin = false;
+        Boolean isAdmin = true;
 
         userFacade.create(login, password, nameUser, cpf, email, isAdmin);
 
@@ -100,7 +97,7 @@ public class TicketTest {
         String email = "john@example.com";
         String password = "teste123";
         String cpf = "123456789";
-        Boolean isAdmin = false;
+        Boolean isAdmin = true;
 
         userFacade.create(login, password, nameUser, cpf, email, isAdmin);
 
@@ -112,7 +109,7 @@ public class TicketTest {
         assertFalse(ticketFacade.getIsActive(ticketId));
 
         ticketFacade.reactiveById(ticketId);
-        assertTrue(ticketFacade.getIsAdminTicketId(ticketId));
+        assertTrue(ticketFacade.getIsActive(ticketId));
     }
 
     @Test
@@ -128,7 +125,7 @@ public class TicketTest {
         String email = "john@example.com";
         String password = "teste123";
         String cpf = "123456789";
-        Boolean isAdmin = false;
+        Boolean isAdmin = true;
 
         userFacade.create(login, password, nameUser, cpf, email, isAdmin);
 
