@@ -49,6 +49,14 @@ public class EventTestFacade {
         
     }
 
+      public String addEventInDataBaseWithPastDate(String name, String description, Date date){
+        
+    }
+
+    public int getCommentQuantityByEventId(String id){
+
+    }
+
     public void deleteAllEvents(){
      
     }

@@ -85,7 +85,7 @@ public class CommentTest {
         assertNotNull(commentTestFacade.getById(c2Id));
         assertNotNull(commentTestFacade.getById(c3Id));
 
-        assertEquals(1, eventTestFacadeFacade.getQuantityCommentByEventId(firstEventId));
-        assertEquals(2, eventTestFacadeFacade.getQuantityCommentByEventId(secondEventId));
+        assertEquals(1, eventTestFacadeFacade.getCommentQuantityByEventId(firstEventId));
+        assertEquals(2, eventTestFacadeFacade.getCommentQuantityByEventId(secondEventId));
     }
 }
