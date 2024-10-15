@@ -51,6 +51,7 @@ public class TicketTest {
         String ticketId = ticketFacade.create(eventId, 100.0, "A1");
 
         assertNotNull(ticketFacade.getById(ticketId));
+        assertEquals(eventId, ticketFacade.getEventByTicketId(ticketId));
         assertEquals(100.0, ticketFacade.getPriceByTicketId(ticketId), 0.0001);
         assertEquals("A1", ticketFacade.getSeatByTicketId(ticketId));
         assertTrue(ticketFacade.getIsAdminTicketId(ticketId));
