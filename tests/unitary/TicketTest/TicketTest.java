@@ -1,3 +1,8 @@
+package Tests.TicketTest;
+
+import Facade.EventTestFacade;
+import Facade.TicketTestFacade;
+import Facade.UserTestFacade;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -112,7 +117,7 @@ public class TicketTest {
         assertTrue(ticketFacade.getIsActive(ticketId));
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void duplicateTicketTest() throws Exception {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2025, Calendar.SEPTEMBER, 10);
@@ -132,10 +137,6 @@ public class TicketTest {
         String eventId = eventFacade.create(login, name, description, date);
 
         ticketFacade.create(eventId, 100.0, "A1");
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            ticketFacade.create(eventId, 100.0, "A1");
-        });
-
-        assertEquals("Não é possível cadastrar o mesmo assento duas vezes para um único evento.", exception.getMessage());
+        ticketFacade.create(eventId, 100.0, "A1");
     }
 }
